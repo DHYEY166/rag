@@ -61,7 +61,7 @@ def chunk(blocks: list[dict], policy: str, version: str, source: str) -> list[di
                     section_heading,
                     document_id,
                     section["text"],
-                    False,
+                    bool(section["text"].strip()),
                 )
             )
             for child in section["children"]:
@@ -100,9 +100,6 @@ def chunk(blocks: list[dict], policy: str, version: str, source: str) -> list[di
         f"parents={','.join(parent_ids)}",
     )
     return records
-
-
-# TODO: Switch from structural to heirarchical chunking as corpus grows, foundations baked into the code already
 
 
 def chunk_path(path: Path | str, blocks: list[dict]) -> list[dict]:
